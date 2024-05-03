@@ -1,4 +1,5 @@
 import React from 'react';
+import AddToCart from "./addToCart";
 interface CardProps {
     card: CardType
 }
@@ -19,9 +20,10 @@ function Card(props: CardProps) {
             <div className='hero container max-w-screen-lg mx-auto pb-10 flex justify-center '>
                 <img className='absolute w-auto h-36' src='https://dz3we2x72f7ol.cloudfront.net/expansions/151/en-us/SV3pt5_EN_65.png' alt={name} />
             </div>
-            <div className='content h-40 text-center bg-purple-500 rounded-3xl mt-16'>
-                <div className='pt-10'>{name}</div>
+            <div className='content h-48 text-center bg-purple-500 rounded-3xl mt-16'>
+                <div className='pt-14'>{name}</div>
                 <div className='mt-3'>$ 2.29 20 Cards</div>
+                <AddToCart />
             </div>
         </div>
     );
