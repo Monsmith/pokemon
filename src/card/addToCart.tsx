@@ -3,11 +3,10 @@ import { FiShoppingBag } from "react-icons/fi";
 
 function AddToCart() {
     return (
-        <div className='m-2'>
-            <div className='p-2 bg-gray-500 rounded-lg flex justify-evenly items-center'>
-                {/*#3e3d47*/}
+        <div className='m-2 mx-4'>
+            <div className='p-2 bg-grayCart rounded-lg flex justify-evenly items-center'>
                 <FiShoppingBag />
-                <span>
+                <span className='text-sm'>
                     Add to cart
                 </span>
             </div>
