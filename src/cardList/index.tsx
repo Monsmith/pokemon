@@ -28,7 +28,7 @@ interface Prices {
 }
 
 type QueryOptions = {
-    q: string,
+    name: string | null,
     set: string,
     rarity: string,
     type: string,
@@ -50,9 +50,6 @@ function CardList(props: Props) {
 
     return (
         <div>
-            <div className='text-xl font-semibold'>
-                Choose Card
-            </div>
             <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:sm:grid-cols-6 xl:sm:grid-cols-6 gap-x-0 gap-y-7 mt-8">
                 {
                     data.data?.map((card: CardType) => {

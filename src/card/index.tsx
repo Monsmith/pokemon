@@ -36,8 +36,6 @@ function Card(props: CardProps) {
         }
     }
 
-
-
     return (
         <div className='relative w-48'>
             <div className='hero container max-w-screen-lg mx-auto pb-10 flex justify-center '>
