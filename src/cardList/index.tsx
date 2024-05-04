@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Card  from '../card';
 import { useQuery } from 'react-query';
 import { fetchCards } from "../helpers/fetchCards";
@@ -27,8 +27,25 @@ interface Prices {
     averageSellPrice: number;
 }
 
-function CardList() {
-    const { data, status } = useQuery("cardsData", fetchCards);
+type QueryOptions = {
+    q: string,
+    set: string,
+    rarity: string,
+    type: string,
+}
+
+type Props = {
+    setQueryOptions: React.Dispatch<React.SetStateAction<any>>;
+    queryOptions: QueryOptions;
+};
+
+function CardList(props: Props) {
+    const { queryOptions, setQueryOptions } = props;
+    const { data, status, refetch } = useQuery(['cardsData', queryOptions], () => fetchCards(queryOptions));
+    useEffect(()  => {
+        refetch()
+    }, [queryOptions])
+
     if (status === "loading") return <div>Loading...</div>
 
     return (
