@@ -14,6 +14,8 @@ module.exports = {
         grayCart: "#2b2a34",
         grayCard: "#1c1b26",
         priceText: "#ABBBC2",
+        disabledText: "#78777e",
+        addToCartHoverText: "#3e3d47",
       }
     },
   },

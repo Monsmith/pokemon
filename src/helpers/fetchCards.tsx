@@ -12,6 +12,6 @@ export const fetchCards = async (queryOptions: QueryOptions) => {
             queryString += `${key}:"${queryOptions[key as keyof QueryOptions]}" `;
         }
     }
-    const res = await fetch(`https://api.pokemontcg.io/v2/cards?page=1&pageSize=20&q=${queryString}&select=id,name,rarity,set,cardmarket`);
+    const res = await fetch(`https://api.pokemontcg.io/v2/cards?page=1&pageSize=20&q=${queryString}&select=id,name,rarity,set,images,cardmarket`);
     return res.json();
 };

@@ -54,6 +54,8 @@ function App() {
         type: '',
     });
 
+    const [cartItems, setCartItems] = useState([]);
+
     const onSubmitSearch = (e: any) => {
         e.preventDefault()
         const searchValue = searchRef.current && searchRef.current.value
@@ -108,6 +110,8 @@ function App() {
             <CardList
                 setQueryOptions={setQueryOptions}
                 queryOptions={queryOptions}
+                setCartItems={setCartItems}
+                cartItems={cartItems}
             />
         </div>
     </QueryClientProvider>
