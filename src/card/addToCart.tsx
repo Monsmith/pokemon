@@ -13,6 +13,7 @@ interface CardType {
     cardmarket: CardMarket;
     images: Image;
     set: Set;
+    quantity?: number | undefined;
 }
 
 interface Image {
@@ -37,6 +38,21 @@ function AddToCart(props: AddToCartProps) {
 
     const onAddToCart = () => {
         if (!available) return;
+
+        if (cartItems.find((item: CardType) => item.id === card.id)) {
+            const newCartItems = cartItems.map((item: CardType) => {
+                if (item.id === card.id) {
+                    return {
+                        ...item,
+                        quantity: item.quantity && item.quantity + 1
+                    }
+                }
+
+                return item;
+            })
+            setCartItems(newCartItems);
+            return;
+        }
 
         const cardWithQuantity = {
             ...card,

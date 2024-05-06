@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import CardList from './cardList';
 import { QueryClient, QueryClientProvider } from 'react-query'
+import CartModal from "./cartModal";
 const queryClient = new QueryClient()
 
 const CARD_TYPES = [
@@ -55,6 +56,15 @@ function App() {
     });
 
     const [cartItems, setCartItems] = useState([]);
+    const [cartModalIsOpen, setCartModalIsOpen] = useState(false);
+
+    const openModal = () => {
+        setCartModalIsOpen(true);
+    };
+
+    const onCloseModal = () => {
+        setCartModalIsOpen(false);
+    };
 
     const onSubmitSearch = (e: any) => {
         e.preventDefault()
@@ -64,12 +74,13 @@ function App() {
             name: `${searchValue}`
         }));
     };
+    console.log(cartItems, 'cartItems')
 
     return (
     <QueryClientProvider client={queryClient}>
         <div className='px-36 font-poppins'>
             <div className='header flex justify-between mt-12'>
-                <h1 className="mb-4 text-3xl font-extrabold leading-none tracking-tight">
+                <h1 className="mb-4 text-3xl font-extrabold leading-none tracking-tight" onClick={openModal}>
                     Pokemon market
                 </h1>
                 <div>
@@ -113,6 +124,13 @@ function App() {
                 setCartItems={setCartItems}
                 cartItems={cartItems}
             />
+            <CartModal
+                cartModalIsOpen={cartModalIsOpen}
+                onCloseModal={onCloseModal}
+                cartItems={cartItems}
+                setCartItems={setCartItems}
+            />
+
         </div>
     </QueryClientProvider>
   );
