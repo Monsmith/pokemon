@@ -127,7 +127,7 @@ function CartModal(props: CartModalProps) {
                             <tr className='text-left border-b border-addToCartHoverText'>
                                 <th className='font-light'>Item</th>
                                 <th className='w-3/4 font-light'>Qty</th>
-                                <th className='font-light'>Price</th>
+                                <th className='w-16 font-light'>Price</th>
                             </tr>
                         </thead>
                         <tbody className='h-96 overflow-y-auto'>
@@ -143,7 +143,7 @@ function CartModal(props: CartModalProps) {
                                                 <div>{ item.name }</div>
                                                 <div className='text-disabledText'>$ { item.cardmarket.prices.averageSellPrice}</div>
                                             </td>
-                                            <td>
+                                            <td className='w-16'>
                                                 $ { (item.cardmarket.prices.averageSellPrice * (item.quantity || 1)).toFixed(2) }
                                             </td>
                                         </tr>
@@ -178,7 +178,7 @@ function CartModal(props: CartModalProps) {
                         Total card amount
                     </div>
                     <div>
-                        {totalCardAmount().toFixed(2)}
+                        {totalCardAmount()}
                     </div>
                 </div>
                 <div className='flex justify-between mt-3'>
@@ -186,7 +186,7 @@ function CartModal(props: CartModalProps) {
                         Total Price
                     </div>
                     <div>
-                        $ {totalPrice()}
+                        $ {totalPrice().toFixed(2)}
                     </div>
                 </div>
 

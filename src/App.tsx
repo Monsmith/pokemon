@@ -80,7 +80,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
         <div className='px-36 font-poppins'>
             <div className='header flex justify-between mt-12'>
-                <h1 className="mb-4 text-3xl font-extrabold leading-none tracking-tight" onClick={openModal}>
+                <h1 className="mb-4 text-3xl font-extrabold leading-none tracking-tight">
                     Pokemon market
                 </h1>
                 <div className='flex gap-x-2'>
