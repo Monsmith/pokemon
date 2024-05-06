@@ -125,6 +125,7 @@ function App() {
                 queryOptions={queryOptions}
                 setCartItems={setCartItems}
                 cartItems={cartItems}
+                openModal={openModal}
             />
             <CartModal
                 cartModalIsOpen={cartModalIsOpen}

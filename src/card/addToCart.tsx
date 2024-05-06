@@ -5,6 +5,7 @@ interface AddToCartProps {
     card: CardType
     cartItems: CardType[];
     setCartItems: React.Dispatch<React.SetStateAction<any>>;
+    openModal: () => void;
 }
 interface CardType {
     id: number;
@@ -34,7 +35,7 @@ interface Prices {
 }
 
 function AddToCart(props: AddToCartProps) {
-    const { setCartItems, card, cartItems } = props;
+    const { setCartItems, card, cartItems, openModal } = props;
 
     const onAddToCart = () => {
         if (!available) return;
@@ -51,6 +52,7 @@ function AddToCart(props: AddToCartProps) {
                 return item;
             })
             setCartItems(newCartItems);
+            openModal()
             return;
         }
 
@@ -60,6 +62,7 @@ function AddToCart(props: AddToCartProps) {
         }
 
         setCartItems((prevItems: any) => [...prevItems, cardWithQuantity])
+        openModal()
     }
 
     const available = card.set.total > 0;

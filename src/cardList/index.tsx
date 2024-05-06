@@ -44,12 +44,13 @@ type QueryOptions = {
 type Props = {
     setQueryOptions: React.Dispatch<React.SetStateAction<any>>;
     setCartItems: React.Dispatch<React.SetStateAction<any>>;
+    openModal: () => void;
     queryOptions: QueryOptions;
     cartItems: CardType[];
 };
 
 function CardList(props: Props) {
-    const { queryOptions, setCartItems, cartItems } = props;
+    const { queryOptions, setCartItems, cartItems, openModal } = props;
     const { data, status, refetch } = useQuery(['cardsData', queryOptions], () => fetchCards(queryOptions));
     useEffect(()  => {
         refetch()
@@ -62,7 +63,7 @@ function CardList(props: Props) {
             <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:sm:grid-cols-6 xl:sm:grid-cols-6 gap-x-0 gap-y-7 mt-8">
                 {
                     data.data?.map((card: CardType) => {
-                        return <Card key={card.id} card={card} setCartItems={setCartItems} cartItems={cartItems} />
+                        return <Card key={card.id} card={card} setCartItems={setCartItems} cartItems={cartItems} openModal={openModal} />
                     })
                 }
             </div>

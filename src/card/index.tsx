@@ -4,6 +4,7 @@ interface CardProps {
     card: CardType
     cartItems: CardType[];
     setCartItems: React.Dispatch<React.SetStateAction<any>>;
+    openModal: () => void;
 }
 
 interface CardType {
@@ -33,7 +34,7 @@ interface Prices {
 }
 
 function Card(props: CardProps) {
-    const { card, setCartItems, cartItems } = props;
+    const { card, setCartItems, cartItems, openModal } = props;
     const { name, set, rarity, cardmarket, images } = card;
     const { large } = images
     const cardAvailable = set.total > 0;
@@ -54,6 +55,7 @@ function Card(props: CardProps) {
                 <div className='pt-14 text-xs'>{name}</div>
                 <div className='mt-3 mb-4 text-priceText'>$ {cardmarket.prices.averageSellPrice} {cardQuantity()}</div>
                 <AddToCart
+                    openModal={openModal}
                     cartItems={cartItems}
                     setCartItems={setCartItems}
                     card={card}

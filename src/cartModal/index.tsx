@@ -130,7 +130,7 @@ function CartModal(props: CartModalProps) {
                                 <th className='w-16 font-light'>Price</th>
                             </tr>
                         </thead>
-                        <tbody className='h-96 overflow-y-auto'>
+                        <tbody className='overflow-y-auto'>
                         {
                             cartItems.map((item) => {
                                 return (
