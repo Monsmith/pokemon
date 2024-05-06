@@ -17,6 +17,7 @@ module.exports = {
         disabledText: "#78777e",
         addToCartHoverText: "#3e3d47",
         backgroundPrimary: "#252836",
+        btnPrimary: "#da7b61",
       }
     },
   },

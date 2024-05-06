@@ -4,6 +4,7 @@ import './App.css';
 import CardList from './cardList';
 import { QueryClient, QueryClientProvider } from 'react-query'
 import CartModal from "./cartModal";
+import {FiShoppingBag} from "react-icons/fi";
 const queryClient = new QueryClient()
 
 const CARD_TYPES = [
@@ -74,7 +75,6 @@ function App() {
             name: `${searchValue}`
         }));
     };
-    console.log(cartItems, 'cartItems')
 
     return (
     <QueryClientProvider client={queryClient}>
@@ -83,21 +83,23 @@ function App() {
                 <h1 className="mb-4 text-3xl font-extrabold leading-none tracking-tight" onClick={openModal}>
                     Pokemon market
                 </h1>
-                <div>
+                <div className='flex gap-x-2'>
                     <form onSubmit={e => onSubmitSearch(e)}>
                         <input type="text"
                                ref={searchRef}
-                               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block h-12 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                placeholder="Search by Name"/>
                     </form>
-
+                    <div className='p-4 rounded-lg bg-btnPrimary fw-bold cursor-pointer' onClick={() => (openModal())}>
+                        <FiShoppingBag />
+                    </div>
                 </div>
             </div>
 
             <hr className="my-5 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10"/>
             <div className='text-xl font-semibold flex justify-between'>
                 <div className='title'>Choose Card</div>
-                <div className='selects'>
+                <div className='selects flex gap-x-4'>
                     <select onChange={(e) => setQueryOptions({...queryOptions, rarity: e.target.value})}
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option value='1' selected disabled>Rarity</option>

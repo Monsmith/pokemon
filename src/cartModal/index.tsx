@@ -82,52 +82,87 @@ function CartModal(props: CartModalProps) {
         setCartItems([])
     }
 
+    const totalCardAmount = () => {
+        let amount = 0
+        cartItems.map((item: CardType) => {
+            amount += (item?.quantity || 1)
+        })
+
+        return amount
+    }
+
+    const totalPrice = () => {
+        let sum = 0
+        cartItems.map((item: CardType) => {
+            sum += item.cardmarket.prices.averageSellPrice * (item.quantity || 1)
+        })
+        return sum
+    }
+
     return (
         <Modal
             isOpen={cartModalIsOpen}
             onRequestClose={() => (onCloseModal(!cartModalIsOpen))}
-            className="custom-modal bg-backgroundPrimary"
+            className="custom-modal bg-backgroundPrimary font-poppins"
             overlayClassName="custom-modal-overlay"
         >
-            <div className='header p-5'>
-                <h1 className="mb-4 text-3xl font-extrabold leading-none tracking-tight">
-                    Cart
-                </h1>
-                <div onClick={() => {onClearItems()}}>
-                    clear all
+            <div className='header p-5 flex justify-between cursor-pointer'>
+                <div>
+                    <h1 className="mb-4 text-3xl font-extrabold leading-none tracking-tight">
+                        Cart
+                    </h1>
+                    <div className='cursor-pointer' onClick={() => {onClearItems()}}>
+                        clear all
+                    </div>
+                </div>
+                <div className='w-12 h-12 rounded-lg bg-btnPrimary content-center text-center fw-bold' onClick={() => (onCloseModal(!cartModalIsOpen))}>
+                    X
                 </div>
             </div>
 
-            <div className="modal-content">
+            <div className="block max-h-[calc(100%-300px)] overflow-y-auto p-5">
                 {
-                    cartItems.length > 0 ? <table className="table-fixed w-full">
+                    cartItems.length > 0 ? <table className='w-full'>
                         <thead>
-                        <tr>
-                            <th>Item</th>
-                            <th>Qty</th>
-                            <th>Price</th>
-                        </tr>
+                            <tr className='text-left border-b border-addToCartHoverText'>
+                                <th className='font-light'>Item</th>
+                                <th className='w-3/4 font-light'>Qty</th>
+                                <th className='font-light'>Price</th>
+                            </tr>
                         </thead>
-                        <tbody>
+                        <tbody className='h-96 overflow-y-auto'>
                         {
                             cartItems.map((item) => {
                                 return (
                                     <>
-                                        <tr>
-                                            <td>
+                                        <tr >
+                                            <td className='py-5'>
                                                 <img className='w-11 h-14'src={item.images.small}/>
                                             </td>
-                                            <td>
-                                                { item.name }
+                                            <td className='w-3/4 font-light'>
+                                                <div>{ item.name }</div>
+                                                <div className='text-disabledText'>$ { item.cardmarket.prices.averageSellPrice}</div>
                                             </td>
                                             <td>
-                                                { item.cardmarket.prices.averageSellPrice }
+                                                $ { (item.cardmarket.prices.averageSellPrice * (item.quantity || 1)).toFixed(2) }
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td onClick={() => onDecrease(item.id)}>decrese</td>
-                                            <td>{item.quantity}</td>
-                                            <td onClick={() => onIncrease(item.id)}>increase</td>
+                                            <td onClick={() => onDecrease(item.id)}>
+                                                <div className='w-14 h-14 bg-grayCart cursor-pointer rounded-lg content-center text-center fw-bold text-2xl'>
+                                                    -
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div className='text-center content-center bg-grayCart rounded-lg h-14 mx-3'>
+                                                    {item.quantity}
+                                                </div>
+                                            </td>
+                                            <td onClick={() => onIncrease(item.id)}>
+                                                <div className='w-14 h-14 bg-grayCart cursor-pointer rounded-lg content-center text-center fw-bold text-2xl'>
+                                                    +
+                                                </div>
+                                            </td>
                                         </tr>
                                     </>
                                 )
@@ -136,6 +171,28 @@ function CartModal(props: CartModalProps) {
                         </tbody>
                     </table> : <h1 className="mb-4 text-3xl font-extrabold leading-none tracking-tight">Cart is empty</h1>
                 }
+            </div>
+            <div className='summary p-4'>
+                <div className='flex justify-between mt-3'>
+                    <div className='text-disabledText'>
+                        Total card amount
+                    </div>
+                    <div>
+                        {totalCardAmount().toFixed(2)}
+                    </div>
+                </div>
+                <div className='flex justify-between mt-3'>
+                    <div className='text-disabledText'>
+                        Total Price
+                    </div>
+                    <div>
+                        $ {totalPrice()}
+                    </div>
+                </div>
+
+                <div className='w-full cursor-pointer h-12 mt-3 rounded-lg bg-btnPrimary content-center text-center fw-bold'>
+                    Continue to Payment
+                </div>
             </div>
         </Modal>
     );
